@@ -28,6 +28,8 @@ const eventToBuild = (data) => {
 
 // createSlackMessage creates a message from a build object.
 const createSlackMessage = (build) => {
+  const repo = build.source.repoSource;
+  const source = build.sourceProvenance.resolvedRepoSource;
   const message = {
     text: `Build \`${build.id}\``,
     mrkdwn: true,
@@ -39,6 +41,10 @@ const createSlackMessage = (build) => {
           title: 'Status',
           value: build.status
         }]
+      },
+      {
+        title: `GIT commit to \`${repo.repoName}\` on branch \`${repo.branchName}\``,
+        title_link: `https://source.developers.google.com/p/${source.projectId}/r/${source.repoName}@${source.commitSha}`
       }
     ]
   };
