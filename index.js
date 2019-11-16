@@ -51,7 +51,7 @@ const createSlackMessage = (build) => {
       {
         title: build.status,
         title_link: build.logUrl,
-        value: `Commit to ${repoNameAndUrl} on branch ${repoBranchAndUrl}`
+        text: `Commit to ${repoNameAndUrl} on branch ${repoBranchAndUrl}`
       }
     ]
   };
