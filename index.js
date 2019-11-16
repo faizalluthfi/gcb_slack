@@ -30,21 +30,30 @@ const eventToBuild = (data) => {
 const createSlackMessage = (build) => {
   const repo = build.source.repoSource;
   const source = build.sourceProvenance.resolvedRepoSource;
+  const triggerId = build.buildTriggerId;
+
+  const triggerUrl = `https://console.cloud.google.com/cloud-build/triggers/edit/${triggerId}?project=${source.projectId}`;
+
+  const repoUrl = `https://source.cloud.google.com/${source.projectId}/${source.repoName}`;
+  const commitUrl = `${repoUrl}/+/${source.commitSha}`;
+  const branchUrl = `${repoUrl}/+/${repo.branchName}`;
+
+  const triggerNameAndUrl = `<${triggerUrl}|${build.buildTriggerId}>`;
+  const buildIdAndUrl = `<build.logUrl|${build.id}>`
+
+  const repoNameAndUrl = `<${repoUrl}|${repo.repoName}>`;
+  const repoBranchAndUrl = `<${branchUrl}|${repo.branchName}>`;
+
   const message = {
-    text: `Build \`${build.id}\``,
+    text: `${triggerNameAndUrl} build ${buildIdAndUrl}`,
     mrkdwn: true,
     attachments: [
       {
-        title: 'Build logs',
+        title: build.status,
         title_link: build.logUrl,
         fields: [{
-          title: 'Status',
-          value: build.status
+          title: `Commit to ${repoNameAndUrl} on branch ${repoBranchAndUrl}`
         }]
-      },
-      {
-        title: `GIT commit to \`${repo.repoName}\` on branch \`${repo.branchName}\``,
-        title_link: `https://source.cloud.google.com/${source.projectId}/${source.repoName}/+/${source.commitSha}`
       }
     ]
   };
