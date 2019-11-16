@@ -44,7 +44,7 @@ const createSlackMessage = (build) => {
       },
       {
         title: `GIT commit to \`${repo.repoName}\` on branch \`${repo.branchName}\``,
-        title_link: `https://source.developers.google.com/p/${source.projectId}/r/${source.repoName}@${source.commitSha}`
+        title_link: `https://source.cloud.google.com/${source.projectId}/${source.repoName}/+/${source.commitSha}`
       }
     ]
   };
