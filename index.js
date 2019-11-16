@@ -39,7 +39,7 @@ const createSlackMessage = (build) => {
   const branchUrl = `${repoUrl}/+/${repo.branchName}`;
 
   const triggerNameAndUrl = `<${triggerUrl}|${build.buildTriggerId}>`;
-  const buildIdAndUrl = `<build.logUrl|${build.id}>`
+  const buildIdAndUrl = `<${build.logUrl}|${build.id}>`
 
   const repoNameAndUrl = `<${repoUrl}|${repo.repoName}>`;
   const repoBranchAndUrl = `<${branchUrl}|${repo.branchName}>`;
@@ -51,9 +51,7 @@ const createSlackMessage = (build) => {
       {
         title: build.status,
         title_link: build.logUrl,
-        fields: [{
-          title: `Commit to ${repoNameAndUrl} on branch ${repoBranchAndUrl}`
-        }]
+        value: `Commit to ${repoNameAndUrl} on branch ${repoBranchAndUrl}`
       }
     ]
   };
