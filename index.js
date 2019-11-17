@@ -38,15 +38,7 @@ const createSlackMessage = (build) => {
   const commitUrl = `${repoUrl}/+/${source.commitSha}`;
   const branchUrl = `${repoUrl}/+/${repo.branchName}`;
 
-  let buildName = null;
-
-  console.log(build);
-  console.log(build.options);
-
-  build.options.env.forEach(env => {
-    const keyVar = env.split('=');
-    if (keyVar[0] == '_BUILD_NAME') buildName = keyVar[1];
-  });
+  let buildName = build.subtitutions._BUILD_NAME ? build.subtitutions._BUILD_NAME : build.buildTriggerId;
 
   const triggerNameAndUrl = `<${triggerUrl}|${buildName}>`;
   const buildIdAndUrl = `<${build.logUrl}|${build.id}>`
