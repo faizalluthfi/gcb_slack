@@ -9,5 +9,5 @@ steps:
       '--runtime',
       'nodejs10',
       '--set-env-vars',
-      '"SLACK_WEBHOOK_URL=$_SLACK_WEBHOOK_URL"'
+      'SLACK_WEBHOOK_URL=$_SLACK_WEBHOOK_URL'
     ]
