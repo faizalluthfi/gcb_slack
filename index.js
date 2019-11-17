@@ -40,7 +40,7 @@ const createSlackMessage = (build) => {
 
   let buildName = null;
 
-  build.options.env.each(env => {
+  build.options.env.forEach(env => {
     const keyVar = env.split('=');
     if (keyVar[0] == '_BUILD_NAME') buildName = keyVar[1];
   });
